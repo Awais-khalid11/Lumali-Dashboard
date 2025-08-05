@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kumbh+Sans:wght@100..900&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@theme {
+  --font-body: "DM Sans", sans-serif;
+  --font-heading: "Kumbh Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  /* Optionally override default… */
+  --font-sans: var(--font-body);
+}
+
+
+
+@theme {
+  --color-primary: #51111d;
+  --color-secondary: hsl(218, 28%, 13%);
+  --color-darkBlue: hsl(216, 53%, 9%);
+  --color-darkBlue2: hsl(219, 30%, 18%);
+  --color-lightRed: hsl(0, 100%, 63%);
+}
+
+
+
+body {
+  font-family: 'DM Sans', sans-serif; 
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Kumbh Sans', sans-serif; 
+}
+
+.special-text {
+  font-family: 'Kumbh Sans', cursive; 
+  font-weight: 700;
+  color: #007bff;
+}
+
+.another-text-style {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+}
+
+
+.recharts-tooltip-wrapper:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-datepicker__input-container input{
+  text-align: center !important;
+}
+path.recharts-sector{
+    outline: none !important;
+
+}
+
+
+.recharts-surface {
+  outline: none !important;
+}
+/* Add this in global styles or via dev tools */
+::-webkit-scrollbar {
+  height: 2px;
+    width: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+ 
+}
