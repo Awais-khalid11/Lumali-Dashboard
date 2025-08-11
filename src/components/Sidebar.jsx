@@ -11,6 +11,7 @@ import SubsA from "../assets/icons/subscription-a.svg";
 import SubsB from "../assets/icons/subscription-b.svg";
 import SettingA from "../assets/icons/setting-a.svg";
 import SettingB from "../assets/icons/setting-b.svg";
+import Logout from "../assets/icons/logout.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navItems = [
@@ -54,9 +55,10 @@ const Sidebar = ({ isOpen, onClose }) => {
   const logoutButton = (
     <NavLink
       to="/logout"
-      className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg transition border border-[#FFFFFF33] hover:bg-white/10 bg-red-800/20 text-red-600"
+      className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg transition border border-[#FFFFFF33] hover:bg-white/10 bg-[#EFE1BC1A] text-white"
       onClick={onClose}
     >
+      <ReactSVG src={Logout} className="w-5 h-5" />
       <span>Logout</span>
     </NavLink>
   );
@@ -85,7 +87,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2 rounded-lg transition border border-[#FFFFFF33] ${
                   isActive
-                    ? "bg-lime-400 text-black font-semibold"
+                    ? "bg-[#EBA91D] text-white font-semibold"
                     : "hover:bg-white/10"
                 }`
               }

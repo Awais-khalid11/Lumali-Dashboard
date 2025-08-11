@@ -1,87 +1,87 @@
 import React from "react";
-// import TrendUpIcon from "../../public/assets/icons/trend-up.svg";
-// import TrendDownIcon from "../../public/assets/icons/trend-down.svg";
+import TotalUsersIcon from "../assets/icons/totaluser.svg";
+import ActiveChildrenIcon from "../assets/icons/little-Kid.svg";
+import StoriesIcon from "../assets/icons/reels.svg";
+import SubscriptionsIcon from "../assets/icons/crown.svg";
+import TrendUpIcon from "../assets/icons/trend-up.svg";
+import TrendDownIcon from "../assets/icons/trend-up.svg";
 
-const Cards = ({ icon, users, userNumber, analytics, total }) => {
-  const analyticsColorClass =
-    analytics === "stable"
-      ? "text-green-600"
-      : analytics && analytics.startsWith("+")
-      ? "text-green-600"
-      : analytics && analytics.startsWith("-")
-      ? "text-red-600"
-      : "text-gray-600";
+const Cards = ({
+  type = "total-users",
+  title,
+  value,
+  analytics,
+  description,
+}) => {
+  const getIcon = () => {
+    switch (type) {
+      case "total-users":
+        return TotalUsersIcon;
+      case "active-children":
+        return ActiveChildrenIcon;
+      case "stories":
+        return StoriesIcon;
+      case "subscriptions":
+        return SubscriptionsIcon;
+      default:
+        return TotalUsersIcon;
+    }
+  };
 
-  let displayAnalyticsIcon = null;
+  const getAnalyticsDisplay = () => {
+    if (!analytics) return null;
 
-  if (analytics === "stable") {
-    displayAnalyticsIcon = (
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 12 12"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="mr-1"
-      >
-        <circle cx="6" cy="6" r="4" fill="#10B981" />
-      </svg>
-    );
-  } else if (analytics && analytics.startsWith("-")) {
-    displayAnalyticsIcon = (
-      <img
-        src={TrendDownIcon}
-        alt="Trend Down Icon"
-        className="w-3 h-3 sm:w-4 sm:h-4 mr-1"
-      />
-    );
-  } else if (analytics && analytics.startsWith("+")) {
-    displayAnalyticsIcon = (
-      <img
-        src={TrendUpIcon}
-        alt="Trend Up Icon"
-        className="w-3 h-3 sm:w-4 sm:h-4 mr-1"
-      />
-    );
-  }
+    let colorClass = "text-gray-600";
+    let icon = null;
+
+    if (analytics === "stable") {
+      colorClass = "text-green-600";
+      icon = <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>;
+    } else if (analytics.startsWith("+")) {
+      colorClass = "text-green-600";
+      icon = <img src={TrendUpIcon} alt="Trend Up" className="w-3 h-3 mr-1" />;
+    } else if (analytics.startsWith("-")) {
+      colorClass = "text-red-600";
+      icon = (
+        <img src={TrendDownIcon} alt="Trend Down" className="w-3 h-3 mr-1" />
+      );
+    }
+
+    return { colorClass, icon };
+  };
+
+  const analyticsDisplay = getAnalyticsDisplay();
 
   return (
-    <div
-      className="w-full p-3 sm:p-4 md:p-5 flex flex-col gap-2 sm:gap-3 border border-[rgba(37,37,37,0.07)]
-        bg-white rounded-[10px] sm:rounded-[12px] shadow-sm hover:shadow-md transition-shadow
-        text-gray-900"
-    >
-      <div>
-        <img
-          src={icon}
-          alt={`${users} Icon`}
-          className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11"
-        />
-      </div>
+    <div className="bg-white rounded-lg border border-gray-100 p-4 hover:shadow-md transition-shadow duration-200">
+      <div className="flex items-start gap-3">
+        {/* Icon on left */}
+        <img src={getIcon()} alt={`${title} Icon`} className="w-10 h-10 mt-1" />
 
-      <div className="opacity-80 text-sm sm:text-[15px] md:text-[16px] leading-[1] font-semibold">
-        <p>{users}</p>
-      </div>
+        {/* Content on right */}
+        <div className="flex flex-col">
+          <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
 
-      <div className="flex gap-1 sm:gap-2 items-center">
-        <h1 className="text-xl sm:text-2xl font-bold mb-0 leading-[1]">
-          {userNumber}
-        </h1>
-        {analytics && (
-          <p className="flex items-center text-xs sm:text-sm">
-            {displayAnalyticsIcon}
-            <span className={`${analyticsColorClass} font-medium`}>
-              {analytics}
-            </span>
-          </p>
-        )}
-      </div>
+          {/* Value + Analytics in a row */}
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-2xl font-bold text-gray-900">{value}</h2>
+            {analytics && analyticsDisplay && (
+              <div className="flex items-center">
+                {analyticsDisplay.icon}
+                <span
+                  className={`text-xs font-medium ${analyticsDisplay.colorClass}`}
+                >
+                  {analytics}
+                </span>
+              </div>
+            )}
+          </div>
 
-      {total && (
-        <div className="text-xs sm:text-sm leading-[1] opacity-80 line-clamp-1">
-          <p>{total}</p>
+          {description && (
+            <p className="text-xs text-gray-500">{description}</p>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

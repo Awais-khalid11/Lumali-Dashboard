@@ -70,16 +70,21 @@ const LineCharts = () => {
     <div className="bg-white rounded-[12px] shadow-sm p-4 sm:p-5">
       <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-4 justify-between items-start sm:items-center">
         <h1 className="text-xl sm:text-[25px] font-bold text-black leading-[1]">
-          User Grow Chart
+          Stories Created Over Time
         </h1>
         <div className="flex flex-wrap gap-2 sm:gap-3">
           {chartTabLabels.map((item) => (
-            <Button
+            <button
               key={item}
-              text={item}
-              isActive={item === activeChartTab}
-              onButtonClick={handleChartTabClick}
-            />
+              onClick={() => handleChartTabClick(item)}
+              className={`px-3 py-1.5 text-sm font-medium border border-[#2525251A] rounded-md transition-colors ${
+                item === activeChartTab
+                  ? "bg-white text-black"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {item}
+            </button>
           ))}
         </div>
       </div>
@@ -96,7 +101,7 @@ const LineCharts = () => {
               <defs>
                 <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#A9C87B" stopOpacity={0.6} />
-                  <stop offset="100%" stopColor="#B0ED5600" stopOpacity={0} />
+                  <stop offset="100%" stopColor="#FF8A00" stopOpacity={0} />
                 </linearGradient>
               </defs>
 
@@ -115,12 +120,12 @@ const LineCharts = () => {
               <Area
                 type="linear"
                 dataKey="pv"
-                stroke="#B0ED56"
+                stroke="#FF8A00"
                 strokeWidth={2}
                 fill="url(#greenGradient)"
                 dot={{
                   r: 4,
-                  stroke: "#B0ED56",
+                  stroke: "#FF8A00",
                   strokeWidth: 2,
                   fill: "#ffffff",
                 }}
@@ -142,7 +147,7 @@ const LineCharts = () => {
             <defs>
               <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#A9C87B" stopOpacity={0.6} />
-                <stop offset="100%" stopColor="#B0ED5600" stopOpacity={0} />
+                <stop offset="100%" stopColor="#FF8A00" stopOpacity={0} />
               </linearGradient>
             </defs>
 
@@ -158,12 +163,12 @@ const LineCharts = () => {
             <Area
               type="linear"
               dataKey="pv"
-              stroke="#B0ED56"
+              stroke="#FF8A00"
               strokeWidth={2}
               fill="url(#greenGradient)"
               dot={{
                 r: 4,
-                stroke: "#B0ED56",
+                stroke: "#FF8A00",
                 strokeWidth: 2,
                 fill: "#ffffff",
               }}
