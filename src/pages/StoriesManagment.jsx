@@ -1,6 +1,8 @@
 import { MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import BasicTable from "../components/BasicTable";
+import StoriesManagementModal from "../components/SroriesManagmentModal";
+import PlayStoryModal from "../components/PlayStoryModal";
 
 const renderStatus = (status) => {
   const statusStyles = {
@@ -19,7 +21,7 @@ const renderStatus = (status) => {
   );
 };
 
-const ActionsDropdown = ({ storyId }) => {
+const ActionsDropdown = ({ storyId, onPlay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -46,19 +48,21 @@ const ActionsDropdown = ({ storyId }) => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
           <div className="py-1">
-            <button className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
-              View Details
+            <button
+              onClick={() => {
+                onPlay();
+                setIsOpen(false);
+              }}
+              className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100"
+            >
+              <div className="flex items-center gap-2">Play</div>
             </button>
-            <button className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
-              Edit Story
-            </button>
-            <button className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
-              Duplicate
-            </button>
-            <hr className="my-1" />
-            <button className="block w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 text-left">
+            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
+              Regenerate
+            </div>
+            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
               Delete
-            </button>
+            </div>
           </div>
         </div>
       )}
@@ -67,47 +71,26 @@ const ActionsDropdown = ({ storyId }) => {
 };
 
 const columns = [
-  {
-    key: "id",
-    label: "ID",
-  },
-  {
-    key: "children",
-    label: "Children",
-  },
-  {
-    key: "type",
-    label: "Type",
-  },
-  {
-    key: "theme",
-    label: "Theme",
-  },
-  {
-    key: "duration",
-    label: "Duration",
-  },
-  {
-    key: "createdDates",
-    label: "Created Dates",
-  },
-  {
-    key: "status",
-    label: "Status",
-  },
-  {
-    key: "actions",
-    label: "Actions",
-  },
+  { key: "id", label: "ID", align: "text-center" },
+  { key: "children", label: "Children", align: "text-left" },
+  { key: "type", label: "Type", align: "text-center" },
+  { key: "theme", label: "Theme", align: "text-center" },
+  { key: "duration", label: "Duration", align: "text-center" },
+  { key: "createdDates", label: "Created Dates", align: "text-center" },
+  { key: "status", label: "Status", align: "text-center" },
+  { key: "actions", label: "Actions", align: "text-center" },
 ];
 
 const StoriesManagement = () => {
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showPlayModal, setShowPlayModal] = useState(false);
 
   const handleFilterClick = () => {
     setShowFilterModal(true);
-    // Here you would open your filter modal
-    console.log("Opening filter modal...");
+  };
+
+  const handlePlayClick = () => {
+    setShowPlayModal(true);
   };
 
   const data = [
@@ -119,7 +102,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "12/4/17",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1001" />,
+      actions: <ActionsDropdown storyId="1001" onPlay={handlePlayClick} />,
     },
     {
       id: "1002",
@@ -129,7 +112,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "8/30/14",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1002" />,
+      actions: <ActionsDropdown storyId="1002" onPlay={handlePlayClick} />,
     },
     {
       id: "1003",
@@ -139,7 +122,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "5/19/12",
       status: renderStatus("Incomplete"),
-      actions: <ActionsDropdown storyId="1003" />,
+      actions: <ActionsDropdown storyId="1003" onPlay={handlePlayClick} />,
     },
     {
       id: "1004",
@@ -149,7 +132,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "9/4/12",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1004" />,
+      actions: <ActionsDropdown storyId="1004" onPlay={handlePlayClick} />,
     },
     {
       id: "1005",
@@ -159,7 +142,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "5/27/15",
       status: renderStatus("Incomplete"),
-      actions: <ActionsDropdown storyId="1005" />,
+      actions: <ActionsDropdown storyId="1005" onPlay={handlePlayClick} />,
     },
     {
       id: "1006",
@@ -169,7 +152,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "10/28/12",
       status: renderStatus("Incomplete"),
-      actions: <ActionsDropdown storyId="1006" />,
+      actions: <ActionsDropdown storyId="1006" onPlay={handlePlayClick} />,
     },
     {
       id: "1007",
@@ -179,7 +162,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "7/18/17",
       status: renderStatus("Incomplete"),
-      actions: <ActionsDropdown storyId="1007" />,
+      actions: <ActionsDropdown storyId="1007" onPlay={handlePlayClick} />,
     },
     {
       id: "1008",
@@ -189,7 +172,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "6/1/12",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1008" />,
+      actions: <ActionsDropdown storyId="1008" onPlay={handlePlayClick} />,
     },
     {
       id: "1009",
@@ -199,7 +182,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "7/27/13",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1009" />,
+      actions: <ActionsDropdown storyId="1009" onPlay={handlePlayClick} />,
     },
     {
       id: "1010",
@@ -209,17 +192,7 @@ const StoriesManagement = () => {
       duration: "2:34",
       createdDates: "5/7/16",
       status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1010" />,
-    },
-    {
-      id: "1011",
-      children: "Bessie Cooper",
-      type: "Full",
-      theme: "Jungle",
-      duration: "2:34",
-      createdDates: "5/7/16",
-      status: renderStatus("Completed"),
-      actions: <ActionsDropdown storyId="1010" />,
+      actions: <ActionsDropdown storyId="1010" onPlay={handlePlayClick} />,
     },
   ];
 
@@ -235,64 +208,18 @@ const StoriesManagement = () => {
         itemsPerPage={10}
       />
 
-      {/* Filter Modal would go here */}
       {showFilterModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">Filter Options</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Status
-                </label>
-                <select className="w-full p-2 border border-gray-200 rounded-md">
-                  <option value="">All</option>
-                  <option value="completed">Completed</option>
-                  <option value="incomplete">Incomplete</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Type
-                </label>
-                <select className="w-full p-2 border border-gray-200 rounded-md">
-                  <option value="">All</option>
-                  <option value="full">Full</option>
-                  <option value="semi">Semi</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Theme
-                </label>
-                <select className="w-full p-2 border border-gray-200 rounded-md">
-                  <option value="">All</option>
-                  <option value="jungle">Jungle</option>
-                  <option value="space">Space</option>
-                  <option value="fantasy">Fantasy</option>
-                  <option value="ocean">Ocean</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex justify-end gap-2 mt-6">
-              <button
-                onClick={() => setShowFilterModal(false)}
-                className="px-4 py-2 text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  // Apply filters logic here
-                  setShowFilterModal(false);
-                }}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
-                Apply Filters
-              </button>
-            </div>
-          </div>
-        </div>
+        <StoriesManagementModal
+          onClose={() => setShowFilterModal(false)}
+          onApply={(filters) => {
+            console.log("Applied filters:", filters);
+            setShowFilterModal(false);
+          }}
+        />
+      )}
+
+      {showPlayModal && (
+        <PlayStoryModal onClose={() => setShowPlayModal(false)} />
       )}
     </div>
   );

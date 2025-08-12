@@ -1,15 +1,6 @@
-import {
-  Eye,
-  MoreVertical,
-  Trash2,
-  ChevronRight,
-  ChevronDown,
-  Check,
-  X,
-} from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import BasicTable from "../components/BasicTable";
+import UserFilterModal from "../components/UserFilterModal"; // New filter modal
 
 const renderStatus = (status) => {
   const styles = {
@@ -23,6 +14,16 @@ const renderStatus = (status) => {
     </span>
   );
 };
+
+import {
+  Eye,
+  MoreVertical,
+  Trash2,
+  ChevronRight,
+  ChevronDown,
+} from "lucide-react";
+import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CustomDropdown = ({ userId }) => {
   const [open, setOpen] = useState(false);
@@ -44,26 +45,14 @@ const CustomDropdown = ({ userId }) => {
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow z-50">
-          <button
-            onClick={() => navigate(`/user/${userId}`)}
-            className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100"
-          >
-            <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4" />
-              View
-            </div>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+          <button className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100">
+            <div className="flex items-center gap-2">View</div>
           </button>
-          <div className="flex justify-between items-center px-3 py-2 hover:bg-gray-100">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full" />
-              Active
-            </div>
-            <ChevronDown className="w-4 h-4 text-gray-400" />
+          <div className="flex items-center gap-2 px-3 py-2    hover:bg-gray-100">
+            Active
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 text-red-500 hover:bg-gray-100">
-            <Trash2 className="w-4 h-4" />
-            Delete
+          <div className="flex items-center gap-2 px-3 py-2    hover:bg-gray-100">
+            Deactivate
           </div>
         </div>
       )}
@@ -82,14 +71,14 @@ const columns = [
   { key: "action", label: "Actions", align: "text-center" },
 ];
 
-const data = [
+const rawData = [
   {
     id: "1001",
     name: "Ralph Edwards",
     email: "georgia.young@example.com",
     children: "Ralph Edwards",
     plan: "Premium",
-    created: "12/4/17",
+    created: "2017-12-04",
     status: renderStatus("Active"),
     action: <CustomDropdown userId="1001" />,
   },
@@ -99,7 +88,7 @@ const data = [
     email: "kenzi.lawson@example.com",
     children: "Darrell Steward",
     plan: "Basic",
-    created: "8/30/14",
+    created: "2014-08-30",
     status: renderStatus("Active"),
     action: <CustomDropdown userId="1002" />,
   },
@@ -109,7 +98,7 @@ const data = [
     email: "felicia.reid@example.com",
     children: "Jenny Wilson",
     plan: "Freemium",
-    created: "5/9/12",
+    created: "2012-05-09",
     status: renderStatus("Inactive"),
     action: <CustomDropdown userId="1003" />,
   },
@@ -133,17 +122,119 @@ const data = [
     status: renderStatus("Inactive"),
     action: <CustomDropdown userId="1005" />,
   },
+  {
+    id: "1006",
+    name: "Arlene McCoy",
+    email: "tanya.hill@example.com",
+    children: "Arlene McCoy",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Active"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  {
+    id: "1007",
+    name: "Arlene McCoy",
+    email: "tanya.hill@example.com",
+    children: "Arlene McCoy",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Inactive"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  {
+    id: "1008",
+    name: "Arlene McCoy",
+    email: "tanya.hill@example.com",
+    children: "Arlene McCoy",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Inactive"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  {
+    id: "1009",
+    name: "Jenny Wilson",
+    email: "tanya.hill@example.com",
+    children: "Jenny Wilson",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Active"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  {
+    id: "1010",
+    name: "Arlene McCoy",
+    email: "tanya.hill@example.com",
+    children: "Arlene McCoy",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Active"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  {
+    id: "1011",
+    name: "Jenny Wilson",
+    email: "tanya.hill@example.com",
+    children: "Jenny Wilson",
+    plan: "Basic",
+    created: "5/27/15",
+    status: renderStatus("Active"),
+    action: <CustomDropdown userId="1005" />,
+  },
+  // ... Add the rest of your user data here
 ];
 
 const UserManagement = () => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filters, setFilters] = useState(null);
+
+  const handleApplyFilters = (appliedFilters) => {
+    setFilters(appliedFilters);
+  };
+
+  const filterData = () => {
+    if (!filters) return rawData;
+
+    return rawData.filter((item) => {
+      const { status, category, plan, dateRange } = filters;
+
+      const matchStatus =
+        !status.length ||
+        status.includes("All") ||
+        status.some((s) =>
+          item.status?.props?.children?.toLowerCase().includes(s.toLowerCase())
+        );
+
+      const matchPlan = !plan.length || plan.includes(item.plan);
+
+      const matchDate =
+        !dateRange[0] ||
+        !dateRange[1] ||
+        (new Date(item.created) >= new Date(dateRange[0]) &&
+          new Date(item.created) <= new Date(dateRange[1]));
+
+      return matchStatus && matchPlan && matchDate;
+    });
+  };
+
   return (
     <div>
       <BasicTable
         title="Users Management"
         columns={columns}
-        data={data}
+        data={filterData()}
         showPagination={true}
         showSearch={true}
+        showFilter={true}
+        filterButtonText="Filters"
+        onFilterClick={() => setIsFilterOpen(true)}
+      />
+
+      <UserFilterModal
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        onApply={handleApplyFilters}
       />
     </div>
   );

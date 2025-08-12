@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import Cards from "../components/Cards";
 import LineCharts from "../components/LineCharts";
 import ProgressChart from "../components/ProgressChart";
+import BasicTable from "../components/BasicTable";
 
 const textData = ["All Time", "This Week", "This Month", "This Year"];
 
@@ -114,6 +115,90 @@ const allCardsData = {
   ],
 };
 
+// Tables: columns and data
+const themeUsageColumns = [
+  { key: "theme", label: "Theme" },
+  { key: "count", label: "Count" },
+  { key: "percentage", label: "% of Total Stories" },
+];
+
+const themeUsageData = [
+  { theme: "Jungle", count: "62,430", percentage: "24.9%" },
+  { theme: "Space", count: "51,210", percentage: "20.4%" },
+  { theme: "Fantasy", count: "47,980", percentage: "19.1%" },
+  { theme: "Ocean", count: "39,665", percentage: "15.8%" },
+  { theme: "Adventure", count: "49,320", percentage: "19.7%" },
+];
+
+const recentStoriesColumns = [
+  { key: "storyId", label: "Story ID" },
+  { key: "child", label: "Child" },
+  { key: "type", label: "Type" },
+  { key: "theme", label: "Theme" },
+  { key: "date", label: "Date" },
+];
+
+const recentStoriesData = [
+  {
+    storyId: "10234",
+    child: "Bessie Cooper",
+    type: "Full",
+    theme: "Jungle",
+    date: "2025-07-06",
+  },
+  {
+    storyId: "10233",
+    child: "Jerome Bell",
+    type: "Semi",
+    theme: "Space",
+    date: "2025-07-06",
+  },
+  {
+    storyId: "10232",
+    child: "Ronald Richards",
+    type: "Full",
+    theme: "Fantasy",
+    date: "2025-07-06",
+  },
+  {
+    storyId: "10231",
+    child: "Robert Fox",
+    type: "Semi",
+    theme: "Ocean",
+    date: "2025-07-06",
+  },
+  {
+    storyId: "10230",
+    child: "Theresa Webb",
+    type: "Full",
+    theme: "Adventure",
+    date: "2025-07-06",
+  },
+];
+
+const recentActivityData = [
+  {
+    activity: "Alice Johnson signed up as a consumer",
+    time: "2 hrs ago",
+    avatar: "https://randomuser.me/api/portraits/thumb/women/10.jpg",
+  },
+  {
+    activity: "Offer Approved: Offer #456 approved for Bliss Beauty",
+    time: "2 hrs ago",
+    avatar: "https://randomuser.me/api/portraits/thumb/men/11.jpg",
+  },
+  {
+    activity: "Carol Williams updated offer #452 (Price changed)",
+    time: "2 hrs ago",
+    avatar: "https://randomuser.me/api/portraits/thumb/women/12.jpg",
+  },
+  {
+    activity: "David Brown added payment method (Visa •••• 8821)",
+    time: "1 hr ago",
+    avatar: "https://randomuser.me/api/portraits/thumb/men/13.jpg",
+  },
+];
+
 const Dashboard = () => {
   const [activeButton, setActiveButton] = useState("This Month");
 
@@ -160,8 +245,67 @@ const Dashboard = () => {
         <LineCharts />
       </div>
 
-      <div className="w-full">
-        <ProgressChart />
+      {/* Row 1: Themes by Usage + Progress Chart in same white box */}
+      <div className="mb-6">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
+          <div>
+            <BasicTable
+              title="Themes by Usage"
+              columns={themeUsageColumns}
+              data={themeUsageData}
+              showSearch={false}
+              showFilter={false}
+              showPagination={true}
+              itemsPerPage={5}
+              showExportBtn={false}
+            />
+          </div>
+
+          <div className="flex items-center justify-center">
+            <ProgressChart />
+          </div>
+        </div>
+      </div>
+
+      {/* Row 2: Recent Stories Table + Recent Activity in same white box */}
+      <div className="mb-6">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
+          <div>
+            <BasicTable
+              title="Recent Stories"
+              columns={recentStoriesColumns}
+              data={recentStoriesData}
+              showSearch={false}
+              showFilter={false}
+              showPagination={true}
+              itemsPerPage={5}
+              showExportBtn={false}
+            />
+          </div>
+
+          <div className="border border-gray-200 rounded-md p-4 h-full min-h-[300px] bg-white">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Recent Activity
+            </h3>
+            <div className="space-y-4 overflow-y-auto max-h-[400px]">
+              {recentActivityData.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <img
+                    src={item.avatar}
+                    alt="User"
+                    className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-800 leading-5 font-medium">
+                      {item.activity}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">{item.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

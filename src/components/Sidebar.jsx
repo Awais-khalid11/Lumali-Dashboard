@@ -70,7 +70,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       } md:translate-x-0 pl-0 pt-0 md:pl-2.5 md:pt-2.5`}
     >
       <div
-        className="h-screen md:h-[calc(100vh-32px)] w-64 text-white px-5 py-6 flex flex-col rounded-[10px]"
+        className="h-screen md:h-[calc(100vh-32px)] w-66 text-white px-5 py-6 flex flex-col rounded-[10px]"
         style={{ backgroundColor: "#081E35" }}
       >
         {/* Logo */}

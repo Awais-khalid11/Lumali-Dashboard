@@ -49,7 +49,7 @@ const BasicTable = ({
   };
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
@@ -78,7 +78,7 @@ const BasicTable = ({
                   onClick={onFilterClick}
                   className="flex items-center gap-2 px-4 py-2.5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors"
                 >
-                  <IoFilterOutline className="text-lime-400" />
+                  <IoFilterOutline className="text-[#EBA91D]" />
                   <span className="text-gray-800 font-medium hidden md:inline">
                     {filterButtonText}
                   </span>
@@ -111,26 +111,33 @@ const BasicTable = ({
       {/* Table Container */}
       <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[800px]">
-            <thead className=" border-b border-gray-200">
+          {/* Use border-collapse for crisp grid borders */}
+          <table className="w-full min-w-[800px] border-collapse">
+            <thead className="border-b border-gray-200 bg-gray-50">
               <tr>
                 {columns.map((col, idx) => (
                   <th
                     key={idx}
-                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
+                    className={`px-6 py-3 ${
+                      col.align ?? "text-left"
+                    } text-xs font-bold text-gray-900 uppercase tracking-wider border border-gray-200`}
                   >
                     {typeof col.label === "string" ? col.label : col.label}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+
+            {/* Remove divide-y; add per-cell borders instead */}
+            <tbody className="bg-white">
               {currentData.map((row, rowIdx) => (
                 <tr key={rowIdx} className="hover:bg-gray-50">
                   {columns.map((col, colIdx) => (
                     <td
                       key={colIdx}
-                      className="px-6 py-4  whitespace-nowrap text-sm"
+                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        col.align ?? "text-left"
+                      } border border-gray-200`}
                     >
                       {row[col.key]}
                     </td>

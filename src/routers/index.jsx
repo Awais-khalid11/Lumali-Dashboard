@@ -6,7 +6,7 @@ import MainLayout from "../layouts/MainLayout";
 // Pages
 import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Dashboard";
-import Settings from "../pages/Settings";
+import Settings from "../pages/setting/Settings";
 import UserManagment from "../pages/UserManagment";
 import Subscriptions from "../pages/Subscriptions";
 import StoriesManagment from "../pages/StoriesManagment";
