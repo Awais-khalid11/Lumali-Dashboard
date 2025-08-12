@@ -3,11 +3,13 @@ import { FiMenu } from "react-icons/fi";
 import NotificationIcon from "../assets/icons/notification.svg";
 import { FiSearch } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ onMenuClick, isSidebarOpen }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const notificationRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,7 +126,13 @@ const Navbar = ({ onMenuClick, isSidebarOpen }) => {
               {/* Footer */}
               <div className="border-t border-gray-300 bg-orange-100">
                 <div className="text-center py-3">
-                  <button className="text-yellow-500 font-medium text-sm hover:underline">
+                  <button
+                    onClick={() => {
+                      setShowNotifications(false);
+                      navigate("/notifications");
+                    }}
+                    className="text-yellow-500 font-medium text-sm hover:underline"
+                  >
                     See All Notifications
                   </button>
                 </div>

@@ -10,6 +10,7 @@ import Settings from "../pages/setting/Settings";
 import UserManagment from "../pages/UserManagment";
 import Subscriptions from "../pages/Subscriptions";
 import StoriesManagment from "../pages/StoriesManagment";
+import Notifications from "../pages/Notifications";
 
 const Routers = () => {
   return (
@@ -21,6 +22,7 @@ const Routers = () => {
         <Route path="user" element={<UserManagment />} />
         <Route path="subscriptions" element={<Subscriptions />} />
         <Route path="stories" element={<StoriesManagment />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Route>
 
       {/* 404 fallback */}
