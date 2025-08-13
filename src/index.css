@@ -12,7 +12,6 @@
   --font-inter: "Inter", sans-serif;
   --font-sans: var(--font-body);
 
-  --color-primary: #51111d;
   --color-secondary: hsl(218, 28%, 13%);
   --color-darkBlue: hsl(216, 53%, 9%);
   --color-darkBlue2: hsl(219, 30%, 18%);
@@ -64,4 +63,9 @@ path.recharts-sector {
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 4px;
+}
+
+.bg{
+  background-image: url(./assets/images/bg.png);
+  background-color: #081E35;
 }

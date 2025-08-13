@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import Logo from "../assets/images/Logo.svg";
 import DashboardA from "../assets/icons/dashboard-a.svg";
@@ -14,6 +14,8 @@ import SettingB from "../assets/icons/setting-b.svg";
 import Logout from "../assets/icons/logout.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
+
   const navItems = [
     {
       id: 1,
@@ -52,15 +54,22 @@ const Sidebar = ({ isOpen, onClose }) => {
     },
   ];
 
+  const handleLogout = () => {
+    // ✅ Your logout logic here (e.g., clear tokens, reset user state)
+    // localStorage.removeItem("token");
+
+    navigate("/login");
+    onClose?.();
+  };
+
   const logoutButton = (
-    <NavLink
-      to="/logout"
-      className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg transition border border-[#FFFFFF33] hover:bg-white/10 bg-[#EFE1BC1A] text-white"
-      onClick={onClose}
+    <button
+      onClick={handleLogout}
+      className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg transition border border-[#FFFFFF33] hover:bg-white/10 bg-[#EFE1BC1A] text-white w-full"
     >
       <ReactSVG src={Logout} className="w-5 h-5" />
       <span>Logout</span>
-    </NavLink>
+    </button>
   );
 
   return (

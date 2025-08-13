@@ -11,6 +11,10 @@ import UserManagment from "../pages/UserManagment";
 import Subscriptions from "../pages/Subscriptions";
 import StoriesManagment from "../pages/StoriesManagment";
 import Notifications from "../pages/Notifications";
+import LoginPage from "../pages/auth/Login";
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import CheckYourEmail from "../pages/auth/CheckYourEmail";
+import NewPassword from "../pages/auth/NewPassword";
 
 const Routers = () => {
   return (
@@ -24,9 +28,13 @@ const Routers = () => {
         <Route path="stories" element={<StoriesManagment />} />
         <Route path="/notifications" element={<Notifications />} />
       </Route>
-
       {/* 404 fallback */}
       <Route path="*" element={<NotFound />} />
+      {/*Auth Pages */}
+      <Route path="login" element={<LoginPage />} />\
+      <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route path="check-your-email" element={<CheckYourEmail />} />
+      <Route path="new-password" element={<NewPassword />} />
     </Routes>
   );
 };
