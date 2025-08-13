@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo1 from "../../assets/images/Logo1.svg";
 
 const CheckEmail = () => {
+  const navigate = useNavigate();
   const [verificationCode, setVerificationCode] = useState([
     "",
     "",
@@ -29,6 +31,11 @@ const CheckEmail = () => {
       const prevInput = document.getElementById(`code-${index - 1}`);
       if (prevInput) prevInput.focus();
     }
+  };
+
+  const handleVerify = () => {
+    // ✅ Optional: Add actual verification logic here
+    navigate("/new-password");
   };
 
   return (
@@ -66,7 +73,8 @@ const CheckEmail = () => {
         </div>
 
         <button
-          type="submit"
+          type="button"
+          onClick={handleVerify}
           className="w-full bg-yellow-500 text-white py-2 rounded-full hover:bg-yellow-600 transition font-medium text-sm sm:text-base"
         >
           Verify

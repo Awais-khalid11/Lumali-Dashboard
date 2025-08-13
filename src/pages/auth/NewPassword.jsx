@@ -1,9 +1,25 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo1 from "../../assets/images/Logo1.svg";
 
 const NewPassword = () => {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // ✅ Here you can call API to update password
+    // await api.resetPassword(password);
+
+    navigate("/login"); // Redirect to login after saving
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center relative bg px-4 sm:px-6">
@@ -16,7 +32,7 @@ const NewPassword = () => {
           Create your New Password
         </h2>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSave} className="space-y-4">
           <div>
             <label className="block mb-1 text-sm font-medium">Password</label>
             <input
@@ -25,6 +41,7 @@ const NewPassword = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••••••"
+              required
             />
           </div>
 
@@ -38,6 +55,7 @@ const NewPassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full border rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••••••"
+              required
             />
           </div>
 
@@ -47,7 +65,7 @@ const NewPassword = () => {
           >
             Save
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

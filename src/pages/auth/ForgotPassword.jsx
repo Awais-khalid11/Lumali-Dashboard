@@ -1,7 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Logo1 from "../../assets/images/Logo1.svg";
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // ✅ You can also call your API to send reset email here
+    navigate("/check-your-email"); // Navigate to the "Check Your Email" page
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center relative bg px-4 sm:px-6">
       <div className="relative bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-sm sm:max-w-md z-10">
@@ -18,13 +27,14 @@ const ForgotPassword = () => {
           password.
         </p>
 
-        <div className="space-y-5 sm:space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           <div>
             <label className="block mb-1 text-sm font-medium">
               Email Address
             </label>
             <input
               type="email"
+              required
               className="w-full border rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email address"
             />
@@ -36,7 +46,7 @@ const ForgotPassword = () => {
           >
             Submit
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
