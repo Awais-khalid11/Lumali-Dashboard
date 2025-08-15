@@ -50,7 +50,6 @@ const BasicTable = ({
 
   return (
     <div className="w-full">
-      {/* Header Section */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
           {title}
@@ -108,10 +107,8 @@ const BasicTable = ({
         )}
       </div>
 
-      {/* Table Container */}
       <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
         <div className="overflow-x-auto">
-          {/* Responsive table with horizontal scroll */}
           <div className="min-w-full">
             <table className="w-full border-collapse">
               <thead className="border-b border-gray-200 bg-gray-50">

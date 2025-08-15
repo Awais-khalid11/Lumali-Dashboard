@@ -11,18 +11,14 @@ const DropDownButton = ({
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    // Check screen width on mount and resize
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 767);
     };
 
-    // Initial check
     checkScreenSize();
 
-    // Add event listener for window resize
     window.addEventListener("resize", checkScreenSize);
 
-    // Cleanup function
     return () => {
       window.removeEventListener("resize", checkScreenSize);
     };
