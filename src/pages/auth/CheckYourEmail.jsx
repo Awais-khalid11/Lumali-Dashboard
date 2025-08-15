@@ -34,7 +34,6 @@ const CheckEmail = () => {
   };
 
   const handleVerify = () => {
-    // ✅ Optional: Add actual verification logic here
     navigate("/new-password");
   };
 

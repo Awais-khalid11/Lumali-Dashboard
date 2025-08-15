@@ -3,6 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import BasicTable from "../components/BasicTable";
 import StoriesManagementModal from "../components/SroriesManagmentModal";
 import PlayStoryModal from "../components/PlayStoryModal";
+import PlayIcon from "../assets/icons/play.svg";
+import RegenerateIcon from "../assets/icons/regenerate.svg";
+import DeleteIcon from "../assets/icons/trash.svg";
 
 const renderStatus = (status) => {
   const statusStyles = {
@@ -53,16 +56,21 @@ const ActionsDropdown = ({ storyId, onPlay }) => {
                 onPlay();
                 setIsOpen(false);
               }}
-              className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100"
+              className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100"
             >
-              <div className="flex items-center gap-2">Play</div>
+              <img src={PlayIcon} alt="Play" className="w-4 h-4" />
+              <span>Play</span>
             </button>
-            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
-              Regenerate
-            </div>
-            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
-              Delete
-            </div>
+
+            <button className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100">
+              <img src={RegenerateIcon} alt="Regenerate" className="w-4 h-4" />
+              <span>Regenerate</span>
+            </button>
+
+            <button className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100">
+              <img src={DeleteIcon} alt="Delete" className="w-4 h-4" />
+              <span>Delete</span>
+            </button>
           </div>
         </div>
       )}

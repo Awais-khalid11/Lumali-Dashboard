@@ -13,11 +13,17 @@ const ProgressChart = () => {
 
   return (
     <div className="rounded-[12px] border border-[rgba(0,0,0,0.1)] py-3 px-2 sm:py-[15px] sm:px-4">
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-xl sm:text-[25px] font-bold text-black leading-[1]">
+      <div className="flex flex-col items-center justify-center text-center">
+        {/* Responsive title */}
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black leading-tight">
           Full Personalized
         </h1>
-        <p>Story Types Distribution</p>
+
+        {/* Subtitle with responsive font */}
+        <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-2">
+          Story Types Distribution
+        </p>
+
         <div className="relative" style={{ width: "150px", height: "150px" }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -44,6 +50,7 @@ const ProgressChart = () => {
                 </linearGradient>
               </defs>
 
+              {/* Outer background ring */}
               <Pie
                 data={fullCircle}
                 cx="50%"
@@ -58,6 +65,7 @@ const ProgressChart = () => {
                 <Cell fill="#F3F3F6" />
               </Pie>
 
+              {/* Progress ring */}
               <Pie
                 data={pieChartData}
                 cx="50%"
@@ -77,8 +85,9 @@ const ProgressChart = () => {
             </PieChart>
           </ResponsiveContainer>
 
+          {/* Centered percentage */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="font-bold text-3xl sm:text-4xl text-gray-800">
+            <span className="font-bold text-xl sm:text-2xl md:text-3xl text-gray-800">
               {progressValue}%
             </span>
           </div>

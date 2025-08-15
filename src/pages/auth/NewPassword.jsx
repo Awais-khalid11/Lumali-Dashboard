@@ -15,10 +15,7 @@ const NewPassword = () => {
       return;
     }
 
-    // ✅ Here you can call API to update password
-    // await api.resetPassword(password);
-
-    navigate("/login"); // Redirect to login after saving
+    navigate("/login");
   };
 
   return (

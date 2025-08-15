@@ -9,6 +9,8 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BasicTable from "../components/BasicTable";
 import SubscriptionModal from "../components/SubscriptionModal";
+import ViewIcon from "../assets/icons/edit.svg";
+import CancelIcon from "../assets/icons/close.svg";
 
 const renderStatus = (status) => {
   const styles = {
@@ -44,9 +46,13 @@ const CustomDropdown = ({ userId }) => {
       {open && (
         <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow z-50">
           <button className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100">
-            <div className="flex items-center gap-2">Edit</div>
+            <div className="flex items-center gap-2">
+              <img src={ViewIcon} alt="View/Edit" className="w-4 h-4" />
+              Edit
+            </div>
           </button>
           <div className="flex items-center gap-2 px-3 py-2    hover:bg-gray-100">
+            <img src={CancelIcon} alt="Cancel" className="w-4 h-4" />
             Cancel
           </div>
         </div>

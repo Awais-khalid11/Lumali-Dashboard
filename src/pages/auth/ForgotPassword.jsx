@@ -7,8 +7,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // ✅ You can also call your API to send reset email here
-    navigate("/check-your-email"); // Navigate to the "Check Your Email" page
+    navigate("/check-your-email");
   };
 
   return (

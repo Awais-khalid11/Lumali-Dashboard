@@ -241,68 +241,94 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="mb-5">
-        <LineCharts />
+      {/* Line Chart Section */}
+      <div className="mb-5 bg-white rounded-lg border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Usage Trends
+        </h3>
+        <div className="w-full" style={{ minHeight: "300px" }}>
+          <LineCharts />
+        </div>
       </div>
 
-      {/* Row 1: Themes by Usage + Progress Chart in same white box */}
+      {/* Themes by Usage + Progress Chart Section */}
+      {/* Themes by Usage + Progress Chart Section */}
       <div className="mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-4 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
-          <div>
-            <BasicTable
-              title="Themes by Usage"
-              columns={themeUsageColumns}
-              data={themeUsageData}
-              showSearch={false}
-              showFilter={false}
-              showPagination={true}
-              itemsPerPage={5}
-              showExportBtn={false}
-            />
-          </div>
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="flex flex-wrap gap-6">
+            {/* Table */}
+            <div className="flex-1 min-w-[300px] max-w-[65%] xl:max-w-[65%]">
+              <BasicTable
+                title="Themes by Usage"
+                columns={themeUsageColumns}
+                data={themeUsageData}
+                showSearch={false}
+                showFilter={false}
+                showPagination={true}
+                itemsPerPage={5}
+                showExportBtn={false}
+              />
+            </div>
 
-          <div className="flex items-center justify-center">
-            <ProgressChart />
+            {/* Chart */}
+            <div className="flex-1 min-w-[250px] max-w-[35%] xl:max-w-[35%]">
+              <div className="rounded-md p-4 h-full flex items-center justify-center">
+                <ProgressChart />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Row 2: Recent Stories Table + Recent Activity in same white box */}
+      {/* Recent Stories + Recent Activity Section */}
+      {/* Recent Stories + Recent Activity Section */}
       <div className="mb-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-4 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
-          <div>
-            <BasicTable
-              title="Recent Stories"
-              columns={recentStoriesColumns}
-              data={recentStoriesData}
-              showSearch={false}
-              showFilter={false}
-              showPagination={true}
-              itemsPerPage={5}
-              showExportBtn={false}
-            />
-          </div>
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          {/* Stack vertically on screens < 1360px */}
+          <div className="flex flex-col xl:flex-row gap-6">
+            <div className="w-full xl:w-3/5">
+              <BasicTable
+                title="Recent Stories"
+                columns={recentStoriesColumns}
+                data={recentStoriesData}
+                showSearch={false}
+                showFilter={false}
+                showPagination={true}
+                itemsPerPage={5}
+                showExportBtn={false}
+              />
+            </div>
 
-          <div className="border border-gray-200 rounded-md p-4 h-full min-h-[300px] bg-white">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Recent Activity
-            </h3>
-            <div className="space-y-4 overflow-y-auto max-h-[400px]">
-              {recentActivityData.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <img
-                    src={item.avatar}
-                    alt="User"
-                    className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-800 leading-5 font-medium">
-                      {item.activity}
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">{item.time}</p>
-                  </div>
+            <div className="w-full xl:w-2/5">
+              <div className="border border-gray-200 rounded-md p-4 h-full flex flex-col">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Recent Activity
+                </h3>
+
+                {/* Scrollable list */}
+                <div
+                  className="space-y-4 overflow-y-auto pr-2"
+                  style={{ maxHeight: "400px" }}
+                >
+                  {recentActivityData.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <img
+                        src={item.avatar}
+                        alt="User"
+                        className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-gray-800 leading-5 font-medium">
+                          {item.activity}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {item.time}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

@@ -25,79 +25,98 @@ const UserFilterModal = ({ isOpen, onClose, onApply }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white w-[320px] md:w-[360px] rounded-xl p-5 relative shadow-lg max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="bg-white rounded-xl max-w-full w-full max-h-[90vh] overflow-y-auto sm:w-[400px] p-5 relative">
         {/* Close Icon */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-3 right-3 text-gray-500 hover:text-black"
         >
-          <FiX size={18} />
+          <FiX className="w-5 h-5" />
         </button>
 
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Filter</h2>
+        <h2 className="text-lg font-semibold mb-5">Filter</h2>
 
         {/* Status Filter */}
         <div className="mb-4">
-          <label className="text-sm font-medium text-gray-700 block mb-2">
-            Filter By Latest Update
-          </label>
-          {["All", "Pending", "Approved", "Rejected"].map((item) => (
-            <div key={item} className="flex items-center space-x-2 mb-1">
-              <input
-                type="checkbox"
-                checked={status.includes(item)}
-                onChange={() => toggleOption(status, setStatus, item)}
-                className="form-checkbox text-blue-600"
-              />
-              <span className="text-sm text-gray-700">{item}</span>
-            </div>
-          ))}
+          <p className="text-xs text-gray-500 mb-2">Filter By Latest Update</p>
+          <div className="grid grid-cols-2 gap-2">
+            {["All", "Pending", "Approved", "Rejected"].map((item) => (
+              <label key={item} className="flex items-center text-sm">
+                <input
+                  type="checkbox"
+                  checked={status.includes(item)}
+                  onChange={() => toggleOption(status, setStatus, item)}
+                  className="mr-2"
+                />
+                {item}
+              </label>
+            ))}
+          </div>
         </div>
 
         {/* Plan Filter */}
         <div className="mb-4">
-          <label className="text-sm font-medium text-gray-700 block mb-2">
-            Plan Type
-          </label>
-          {["Freemium", "Basic", "Premium"].map((item) => (
-            <div key={item} className="flex items-center space-x-2 mb-1">
-              <input
-                type="checkbox"
-                checked={plan.includes(item)}
-                onChange={() => toggleOption(plan, setPlan, item)}
-                className="form-checkbox text-blue-600"
-              />
-              <span className="text-sm text-gray-700">{item}</span>
-            </div>
-          ))}
+          <p className="text-xs text-gray-500 mb-2">Plan Type</p>
+          <div className="grid grid-cols-2 gap-2">
+            {["Freemium", "Basic", "Premium"].map((item) => (
+              <label key={item} className="flex items-center text-sm">
+                <input
+                  type="checkbox"
+                  checked={plan.includes(item)}
+                  onChange={() => toggleOption(plan, setPlan, item)}
+                  className="mr-2"
+                />
+                {item}
+              </label>
+            ))}
+          </div>
         </div>
 
-        {/* Date Range Picker */}
-        <div className="mb-6">
-          <label className="text-sm font-medium text-gray-700 block mb-2">
-            Date Range
-          </label>
+        {/* Date Range Picker - Updated to match StoriesManagementModal style */}
+        <div className="mb-4">
+          <p className="text-xs text-gray-500 mb-2">Date Range</p>
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            <button
+              onClick={() => {
+                const end = new Date();
+                const start = new Date();
+                start.setDate(start.getDate() - 7);
+                setDateRange([start, end]);
+              }}
+              className="text-xs sm:text-sm border border-gray-200 px-2 py-1.5 rounded hover:bg-gray-50"
+            >
+              Last 7 days
+            </button>
+            <button
+              onClick={() => {
+                const end = new Date();
+                const start = new Date();
+                start.setDate(start.getDate() - 30);
+                setDateRange([start, end]);
+              }}
+              className="text-xs sm:text-sm border border-gray-200 px-2 py-1.5 rounded hover:bg-gray-50"
+            >
+              Last 30 days
+            </button>
+          </div>
           <div className="relative">
             <DatePicker
               selectsRange
               startDate={startDate}
               endDate={endDate}
               onChange={(update) => setDateRange(update)}
-              isClearable
               placeholderText="From - To"
-              className="w-full border border-gray-300 rounded-md pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-400"
-              popperPlacement="bottom"
-              withPortal
+              className="w-full text-xs sm:text-sm border border-gray-200 pl-9 pr-2 py-1.5 rounded"
             />
-            <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg pointer-events-none" />
+            <FiCalendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           </div>
         </div>
 
-        {/* Single Button */}
+        {/* Apply Button */}
         <button
           onClick={handleApply}
-          className="w-full bg-orange-500 text-white text-sm font-medium py-2.5 rounded-full hover:bg-orange-600 transition-colors"
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-full mt-4 text-sm sm:text-base"
         >
           Apply Now
         </button>

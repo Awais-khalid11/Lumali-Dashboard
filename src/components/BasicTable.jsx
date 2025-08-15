@@ -111,41 +111,42 @@ const BasicTable = ({
       {/* Table Container */}
       <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
         <div className="overflow-x-auto">
-          {/* Use border-collapse for crisp grid borders */}
-          <table className="w-full min-w-[800px] border-collapse">
-            <thead className="border-b border-gray-200 bg-gray-50">
-              <tr>
-                {columns.map((col, idx) => (
-                  <th
-                    key={idx}
-                    className={`px-6 py-3 ${
-                      col.align ?? "text-left"
-                    } text-xs font-bold text-gray-900 uppercase tracking-wider border border-gray-200`}
-                  >
-                    {typeof col.label === "string" ? col.label : col.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-
-            {/* Remove divide-y; add per-cell borders instead */}
-            <tbody className="bg-white">
-              {currentData.map((row, rowIdx) => (
-                <tr key={rowIdx} className="hover:bg-gray-50">
-                  {columns.map((col, colIdx) => (
-                    <td
-                      key={colIdx}
-                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+          {/* Responsive table with horizontal scroll */}
+          <div className="min-w-full">
+            <table className="w-full border-collapse">
+              <thead className="border-b border-gray-200 bg-gray-50">
+                <tr>
+                  {columns.map((col, idx) => (
+                    <th
+                      key={idx}
+                      className={`px-4 py-3 ${
                         col.align ?? "text-left"
-                      } border border-gray-200`}
+                      } text-xs font-bold text-gray-900 uppercase tracking-wider border border-gray-200 whitespace-nowrap`}
                     >
-                      {row[col.key]}
-                    </td>
+                      {typeof col.label === "string" ? col.label : col.label}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody className="bg-white divide-y divide-gray-200">
+                {currentData.map((row, rowIdx) => (
+                  <tr key={rowIdx} className="hover:bg-gray-50">
+                    {columns.map((col, colIdx) => (
+                      <td
+                        key={colIdx}
+                        className={`px-4 py-3 ${
+                          col.align ?? "text-left"
+                        } text-sm text-gray-800 border border-gray-200 whitespace-normal break-words min-w-[120px]`}
+                      >
+                        {row[col.key]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {showExportBtn && (
@@ -158,8 +159,8 @@ const BasicTable = ({
         )}
 
         {showPagination && totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
-            <div className="text-sm text-gray-500">
+          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-4 border-t border-gray-200 gap-4">
+            <div className="text-sm text-gray-500 whitespace-nowrap">
               Page {currentPage} of {totalPages}
             </div>
 

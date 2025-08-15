@@ -104,20 +104,17 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           </button>
         </div>
 
-        {/* Date Picker */}
+        {/* Date Picker - Updated to match other modals */}
         <div className="relative mb-6">
           <DatePicker
             selectsRange
             startDate={startDate}
             endDate={endDate}
             onChange={(update) => setDateRange(update)}
-            isClearable
             placeholderText="From - To"
-            className="w-full border border-gray-300 rounded-md pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring focus:border-orange-400"
-            popperPlacement="bottom"
-            withPortal
+            className="w-full text-sm border border-gray-200 pl-9 pr-2 py-1.5 rounded"
           />
-          <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg pointer-events-none" />
+          <FiCalendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
         </div>
 
         {/* Apply Now Button */}

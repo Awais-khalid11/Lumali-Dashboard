@@ -4,14 +4,14 @@ import GeneralSettingsForm from "./components/GeneralSettingForm";
 import UserPermissionsForm from "./components/UserPermissionForm";
 
 const Settings = () => {
-  const tabs = ["General Settings", "User Permissions"];
+  const tabs = ["General Settings", "System Settings"];
   const [activeTab, setActiveTab] = useState("General Settings");
 
   const renderForm = () => {
     switch (activeTab) {
       case "General Settings":
         return <GeneralSettingsForm />;
-      case "User Permissions":
+      case "System Settings":
         return <UserPermissionsForm />;
       default:
         return null;

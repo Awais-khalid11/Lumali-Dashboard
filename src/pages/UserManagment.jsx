@@ -1,6 +1,9 @@
 import { useState } from "react";
 import BasicTable from "../components/BasicTable";
 import UserFilterModal from "../components/UserFilterModal"; // New filter modal
+import ViewIcon from "../assets/icons/eye.svg";
+import ActiveIcon from "../assets/icons/edit.svg";
+import DeactivateIcon from "../assets/icons/de-activate.svg";
 
 const renderStatus = (status) => {
   const styles = {
@@ -44,16 +47,19 @@ const CustomDropdown = ({ userId }) => {
         <MoreVertical className="h-4 w-4 text-gray-600" />
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow z-50">
-          <button className="flex justify-between items-center px-3 py-2 w-full hover:bg-gray-100">
-            <div className="flex items-center gap-2">View</div>
+        <div className="absolute right-0 mt-2 w-44 bg-white border rounded shadow z-50">
+          <button className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100">
+            <img src={ViewIcon} alt="View" className="w-4 h-4" />
+            <span>View</span>
           </button>
-          <div className="flex items-center gap-2 px-3 py-2    hover:bg-gray-100">
-            Active
-          </div>
-          <div className="flex items-center gap-2 px-3 py-2    hover:bg-gray-100">
-            Deactivate
-          </div>
+          <button className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100">
+            <img src={ActiveIcon} alt="Active" className="w-4 h-4" />
+            <span>Active</span>
+          </button>
+          <button className="flex items-center gap-2 px-3 py-2 w-full hover:bg-gray-100">
+            <img src={DeactivateIcon} alt="Deactivate" className="w-4 h-4" />
+            <span>Deactivate</span>
+          </button>
         </div>
       )}
     </div>
