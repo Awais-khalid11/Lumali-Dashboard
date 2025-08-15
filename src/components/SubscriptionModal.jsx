@@ -44,7 +44,6 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           Filter Subscriptions
         </h2>
 
-        {/* Plan Type */}
         <div className="mb-4">
           <p className="text-sm font-medium text-gray-700 mb-2">Plan Type</p>
           {["Freemium", "Basic", "Premium"].map((item) => (
@@ -60,7 +59,6 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           ))}
         </div>
 
-        {/* Status */}
         <div className="mb-4">
           <p className="text-sm font-medium text-gray-700 mb-2">Status</p>
           {["Active", "Expire", "Trial"].map((item) => (
@@ -76,7 +74,6 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           ))}
         </div>
 
-        {/* Date Presets */}
         <div className="grid grid-cols-2 gap-2 mb-3">
           <button
             onClick={() => handlePreset(7)}
@@ -104,7 +101,6 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           </button>
         </div>
 
-        {/* Date Picker - Updated to match other modals */}
         <div className="relative mb-6">
           <DatePicker
             selectsRange
@@ -117,7 +113,6 @@ const SubscriptionModal = ({ onClose, onApply }) => {
           <FiCalendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
         </div>
 
-        {/* Apply Now Button */}
         <button
           onClick={handleApply}
           className="w-full bg-orange-500 text-white text-sm font-semibold py-2.5 rounded-full hover:bg-orange-600 transition"
