@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const allNotificationsData = [
-  // ... same data as before
   {
     id: 1,
     name: "Drew Cano",
@@ -78,7 +77,6 @@ const allNotificationsData = [
 ];
 
 const archivedNotificationsData = [
-  // ... same data as before
   {
     id: 101,
     name: "Archived - Name 1",
@@ -151,7 +149,6 @@ export default function Notifications() {
                 </span>
               </button>
 
-              {/* Following */}
               <button
                 onClick={() => setFilter("following")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition focus:outline-none shadow-sm ${
@@ -195,7 +192,6 @@ export default function Notifications() {
             </div>
           </div>
 
-          {/* List */}
           <div className="divide-y divide-[#F1E9E0]">
             {visible.length === 0 ? (
               <div className="p-8 text-center text-gray-500">
@@ -226,7 +222,6 @@ export default function Notifications() {
                     </div>
                   </div>
 
-                  {/* Unread indicator */}
                   <div className="flex items-start">
                     {n.unread ? (
                       <span className="w-2.5 h-2.5 bg-orange-500 rounded-full mt-1.5 sm:mt-2.5" />

@@ -241,7 +241,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Line Chart Section */}
       <div className="mb-5 bg-white rounded-lg border border-gray-200 p-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           Usage Trends
@@ -251,15 +250,14 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Themes by Usage + Progress Chart Section */}
-      {/* Themes by Usage + Progress Chart Section */}
       <div className="mb-6">
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="flex flex-wrap gap-6">
-            {/* Table */}
-            <div className="flex-1 min-w-[300px] max-w-[65%] xl:max-w-[65%]">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Themes by Usage
+          </h3>
+          <div className="flex flex-col xl:flex-row gap-4">
+            <div className="w-full xl:w-[65%]">
               <BasicTable
-                title="Themes by Usage"
                 columns={themeUsageColumns}
                 data={themeUsageData}
                 showSearch={false}
@@ -267,24 +265,19 @@ const Dashboard = () => {
                 showPagination={true}
                 itemsPerPage={5}
                 showExportBtn={false}
+                showHeader={false}
               />
             </div>
 
-            {/* Chart */}
-            <div className="flex-1 min-w-[250px] max-w-[35%] xl:max-w-[35%]">
-              <div className="rounded-md p-4 h-full flex items-center justify-center">
-                <ProgressChart />
-              </div>
+            <div className="w-full xl:w-[35%] flex items-center justify-center">
+              <ProgressChart />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Recent Stories + Recent Activity Section */}
-      {/* Recent Stories + Recent Activity Section */}
       <div className="mb-6">
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          {/* Stack vertically on screens < 1360px */}
           <div className="flex flex-col xl:flex-row gap-6">
             <div className="w-full xl:w-3/5">
               <BasicTable

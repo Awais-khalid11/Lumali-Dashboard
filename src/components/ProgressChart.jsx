@@ -14,12 +14,10 @@ const ProgressChart = () => {
   return (
     <div className="rounded-[12px] border border-[rgba(0,0,0,0.1)] py-3 px-2 sm:py-[15px] sm:px-4">
       <div className="flex flex-col items-center justify-center text-center">
-        {/* Responsive title */}
         <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black leading-tight">
           Full Personalized
         </h1>
 
-        {/* Subtitle with responsive font */}
         <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-2">
           Story Types Distribution
         </p>
@@ -85,7 +83,6 @@ const ProgressChart = () => {
             </PieChart>
           </ResponsiveContainer>
 
-          {/* Centered percentage */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <span className="font-bold text-xl sm:text-2xl md:text-3xl text-gray-800">
               {progressValue}%
